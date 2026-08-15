@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+const lang = 'ru' as const;
+---
+
+<Base lang={lang} page="home">
+  <div style="position: relative; background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); min-height: 100vh; display: flex; flex-direction: column;">
+    <SiteHeader lang={lang} page="home" />
+    <main style="flex: 1; display: grid; place-items: center; text-align: center; padding: 120px 28px;">
+      <div>
+        <div style="font-family: var(--font-heading); font-size: clamp(72px, 16vw, 140px); letter-spacing: -.04em; color: var(--color-accent-300); line-height: 1;">404</div>
+        <p style="margin: 16px 0 28px; font-size: 17px; color: color-mix(in srgb, var(--color-text) 72%, transparent);">Страница не найдена / Page not found</p>
+        <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+          <a href="/" class="btn btn-primary">На главную</a>
+          <a href="/en/" class="btn btn-secondary">English</a>
+        </div>
+      </div>
+    </main>
+    <SiteFooter lang={lang} page="home" />
+  </div>
+</Base>

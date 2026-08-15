@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import Landing from '../components/Landing.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+const lang = 'ru' as const;
+---
+
+<Base lang={lang} page="home">
+  <Landing lang={lang}>
+    <SiteHeader slot="header" lang={lang} page="home" />
+    <SiteFooter slot="footer" lang={lang} page="home" />
+  </Landing>
+</Base>

@@ -1,0 +1,38 @@
+---
+import type { Lang } from '../i18n';
+import { content, localizePath } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  page: 'home' | 'about';
+}
+
+const { lang, page } = Astro.props;
+const t = content[lang];
+const onHome = page === 'home';
+---
+
+<footer style="position: relative; z-index: 1; border-top: 1px solid var(--color-divider);">
+  <div
+    style="max-width: 1180px; margin: 0 auto; padding: 26px 28px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; font-size: 13px; color: color-mix(in srgb, var(--color-text) 55%, transparent);"
+  >
+    <span>{t.footer.tagline}</span>
+    <span style="display: flex; gap: 18px;">
+      <a href="https://t.me/johnyezub" target="_blank" rel="noopener" style="text-decoration: none;">{t.footer.telegram}</a>
+      {
+        onHome ? (
+          <a href="https://github.com/JohnYezub" target="_blank" rel="noopener" style="text-decoration: none;">{t.footer.github}</a>
+        ) : (
+          <a href="mailto:y.yezub@gmail.com" style="text-decoration: none;">y.yezub@gmail.com</a>
+        )
+      }
+      {
+        onHome ? (
+          <a href={localizePath('/about', lang)} style="text-decoration: none;">{t.footer.about}</a>
+        ) : (
+          <a href={localizePath('/', lang)} style="text-decoration: none;">{t.footer.home}</a>
+        )
+      }
+    </span>
+  </div>
+</footer>

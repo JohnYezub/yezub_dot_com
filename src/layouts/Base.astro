@@ -1,0 +1,207 @@
+---
+import type { Lang } from '../i18n';
+import { content, localizePath } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  page: 'home' | 'about';
+}
+
+const { lang, page } = Astro.props;
+const t = content[lang];
+const meta = page === 'about' ? t.aboutPage.meta : t.meta;
+
+const path = page === 'home' ? '/' : '/about';
+const site = Astro.site?.origin ?? 'https://yezub.com';
+const canonical = site + localizePath(path, lang);
+const ruHref = site + localizePath(path, 'ru');
+const enHref = site + localizePath(path, 'en');
+
+const dsCss = '/_ds/nocturne-351aa211-ca7c-40f8-8901-932d1b5ce83e/styles.css';
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{meta.title}</title>
+    <meta name="description" content={meta.description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="ru" href={ruHref} />
+    <link rel="alternate" hreflang="en" href={enHref} />
+    <link rel="alternate" hreflang="x-default" href={ruHref} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={meta.title} />
+    <meta property="og:description" content={meta.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={lang === 'ru' ? 'ru_RU' : 'en_US'} />
+    <meta name="twitter:card" content="summary" />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b0b12'/%3E%3Crect x='3.5' y='3.5' width='25' height='25' rx='5' fill='none' stroke='%238b7bff' stroke-width='1.5'/%3E%3Ctext x='16' y='21' font-family='Inter,system-ui,sans-serif' font-size='12' font-weight='600' text-anchor='middle' fill='%238b7bff'%3EEE%3C/text%3E%3C/svg%3E"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href={dsCss} />
+
+    <style is:global>
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        overflow-x: hidden;
+      }
+      a {
+        color: var(--color-accent);
+      }
+      a:hover {
+        color: var(--color-accent-300);
+      }
+      summary {
+        list-style: none;
+        cursor: pointer;
+      }
+      summary::-webkit-details-marker {
+        display: none;
+      }
+      summary::marker {
+        content: '';
+      }
+      @keyframes noct-drift {
+        0% {
+          transform: translate3d(0, 0, 0) scale(1);
+        }
+        50% {
+          transform: translate3d(2%, -3%, 0) scale(1.08);
+        }
+        100% {
+          transform: translate3d(0, 0, 0) scale(1);
+        }
+      }
+      @keyframes noct-scan {
+        0% {
+          transform: translateY(-12%);
+          opacity: 0;
+        }
+        12% {
+          opacity: 0.55;
+        }
+        88% {
+          opacity: 0.55;
+        }
+        100% {
+          transform: translateY(112%);
+          opacity: 0;
+        }
+      }
+      @keyframes noct-pulse {
+        0%,
+        100% {
+          opacity: 0.35;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+      @media (max-width: 860px) {
+        [data-hero] {
+          grid-template-columns: 1fr !important;
+          gap: 36px !important;
+          padding: 56px 0 64px !important;
+        }
+        [data-aboutrow] {
+          grid-template-columns: 1fr !important;
+          gap: 28px !important;
+          padding: 24px !important;
+        }
+        [data-aboutrow] > div:first-child {
+          max-width: 260px;
+        }
+        [data-timeline] {
+          grid-template-columns: 1fr !important;
+          gap: 0 !important;
+        }
+        [data-nav] {
+          flex-wrap: wrap !important;
+          gap: 12px 18px !important;
+        }
+        main {
+          padding-left: 18px !important;
+          padding-right: 18px !important;
+        }
+        section {
+          padding-top: 48px !important;
+          padding-bottom: 48px !important;
+        }
+      }
+      /* Without JS, reveal everything so content is never hidden. */
+      @media (prefers-reduced-motion: reduce) {
+        [data-reveal] {
+          opacity: 1 !important;
+          transform: none !important;
+          transition: none !important;
+        }
+      }
+    </style>
+    <noscript>
+      <style>
+        [data-reveal] {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      </style>
+    </noscript>
+  </head>
+  <body>
+    <slot />
+
+    <script is:inline>
+      (function () {
+        // Scroll-reveal: fade sections in as they enter the viewport.
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (!e.isIntersecting) return;
+              e.target.style.opacity = '1';
+              e.target.style.transform = 'none';
+              io.unobserve(e.target);
+            });
+          },
+          { rootMargin: '0px 0px -6% 0px' }
+        );
+        document.querySelectorAll('[data-reveal]').forEach(function (el) {
+          io.observe(el);
+        });
+
+        // Parallax translate on scroll.
+        var parallaxEls = document.querySelectorAll('[data-parallax]');
+        function onScroll() {
+          var y = window.scrollY;
+          parallaxEls.forEach(function (el) {
+            el.style.transform =
+              'translate3d(0,' + (y * parseFloat(el.dataset.parallax)).toFixed(1) + 'px,0)';
+          });
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+
+        // style-hover: apply extra inline styles on hover (design-system behaviour).
+        document.querySelectorAll('[style-hover]').forEach(function (el) {
+          var hover = el.getAttribute('style-hover');
+          var base = el.getAttribute('style') || '';
+          var sep = base && !base.trim().endsWith(';') ? '; ' : ' ';
+          el.addEventListener('pointerenter', function () {
+            el.setAttribute('style', base + sep + hover);
+          });
+          el.addEventListener('pointerleave', function () {
+            el.setAttribute('style', base);
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>

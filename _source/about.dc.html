@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/nocturne-351aa211-ca7c-40f8-8901-932d1b5ce83e/styles.css">
+<script src="_ds/nocturne-351aa211-ca7c-40f8-8901-932d1b5ce83e/_ds_bundle.js"></script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin: 0; overflow-x: hidden; }
+  a { color: var(--color-accent); }
+  a:hover { color: var(--color-accent-300); }
+  @keyframes noct-drift { 0% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(2%, -3%, 0) scale(1.08); } 100% { transform: translate3d(0,0,0) scale(1); } }
+  @media (max-width: 860px) {
+    [data-hero] { grid-template-columns: 1fr !important; gap: 32px !important; padding: 48px 0 56px !important; }
+    [data-hero] > div:last-child { max-width: 320px; }
+    [data-timeline] { grid-template-columns: 1fr !important; gap: 0 !important; }
+    [data-timeline] > div { padding-top: 24px !important; padding-bottom: 24px !important; }
+    [data-nav] { flex-wrap: wrap !important; gap: 12px 18px !important; }
+    main { padding-left: 18px !important; padding-right: 18px !important; }
+    section { padding-top: 40px !important; padding-bottom: 48px !important; }
+  }
+</style>
+</helmet>
+
+<div style="position: relative; background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); min-height: 100vh; overflow: hidden;">
+
+  <div data-grid style="position: absolute; inset: 0; height: 2000px; pointer-events: none; z-index: 0; background-image: linear-gradient(var(--color-divider) 1px, transparent 1px), linear-gradient(90deg, var(--color-divider) 1px, transparent 1px); background-size: 88px 88px; opacity: .26; mask-image: radial-gradient(120% 60% at 20% 0%, #000 0%, transparent 70%); -webkit-mask-image: radial-gradient(120% 60% at 20% 0%, #000 0%, transparent 70%);"></div>
+  <div data-parallax="0.06" style="position: absolute; top: -260px; left: -160px; width: 780px; height: 780px; pointer-events: none; z-index: 0; background: radial-gradient(circle, color-mix(in srgb, var(--color-accent) 22%, transparent) 0%, transparent 62%); filter: blur(20px); animation: noct-drift 22s ease-in-out infinite;"></div>
+
+  <header style="position: sticky; top: 0; z-index: 40; backdrop-filter: blur(14px); background: color-mix(in srgb, var(--color-bg) 82%, transparent); border-bottom: 1px solid var(--color-divider);">
+    <nav data-nav style="max-width: 1180px; margin: 0 auto; padding: 14px 28px; display: flex; align-items: center; gap: 28px;">
+      <a href="Лендинг Yezub.dc.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--color-text); margin-right: auto;">
+        <span style="width: 26px; height: 26px; border-radius: var(--radius-sm); border: 1px solid var(--color-accent); display: grid; place-items: center; font-size: 12px; color: var(--color-accent);">ЕЕ</span>
+        <span style="font-family: var(--font-heading); font-weight: 500; font-size: 16px;">Евгений Езуб</span>
+      </a>
+      <div style="display: flex; align-items: center; gap: 24px; font-size: 14px;">
+        <a href="Лендинг Yezub.dc.html#services" style="text-decoration: none; color: color-mix(in srgb, var(--color-text) 78%, transparent);" style-hover="color: var(--color-accent);">Услуги</a>
+        <a href="Лендинг Yezub.dc.html#work" style="text-decoration: none; color: color-mix(in srgb, var(--color-text) 78%, transparent);" style-hover="color: var(--color-accent);">Проекты</a>
+        <a href="#top" style="text-decoration: none; color: var(--color-accent);">Обо мне</a>
+      </div>
+      <div style="display: flex; align-items: center; gap: 2px; border: 1px solid var(--color-divider); border-radius: var(--radius-md); padding: 2px; font-size: 12px;">
+        <span style="padding: 4px 9px; border-radius: 6px; color: var(--color-accent); box-shadow: inset 0 0 0 1px var(--color-accent);">RU</span>
+        <span title="EN-версия — следующим шагом" style="padding: 4px 9px; border-radius: 6px; color: color-mix(in srgb, var(--color-text) 40%, transparent); cursor: default;">EN</span>
+      </div>
+      <a href="https://t.me/johnyezub" target="_blank" rel="noopener" class="btn btn-primary">Написать</a>
+    </nav>
+  </header>
+
+  <main id="top" style="position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; padding: 0 28px;">
+
+    <section data-hero style="display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: 56px; align-items: end; padding: 88px 0 72px;">
+      <div>
+        <div data-reveal style="font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--color-accent-300); margin-bottom: 24px; opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);">Обо мне</div>
+        <h1 data-reveal style="font-size: clamp(36px, 4.6vw, 58px); line-height: 1.06; letter-spacing: -.03em; margin: 0 0 24px; max-width: 20ch; text-wrap: balance; opacity: 0; transform: translateY(18px); transition: opacity .7s ease .06s, transform .7s cubic-bezier(.2,.7,.2,1) .06s;">18 лет инженерии: от полевых объектов до собственных продуктов</h1>
+        <p data-reveal style="font-size: 17px; line-height: 1.6; max-width: 58ch; color: color-mix(in srgb, var(--color-text) 74%, transparent); margin: 0; text-wrap: pretty; opacity: 0; transform: translateY(18px); transition: opacity .7s ease .12s, transform .7s cubic-bezier(.2,.7,.2,1) .12s;">Короткая версия: я умею разбираться в чужих сложных системах, объяснять их людям и доводить продукт до состояния, когда за него платят. Длинная — ниже.</p>
+      </div>
+      <div data-reveal style="position: relative; opacity: 0; transform: translateY(18px); transition: opacity .9s ease .18s, transform .9s cubic-bezier(.2,.7,.2,1) .18s;">
+        <div style="position: relative; border: 1px solid var(--color-divider); border-radius: var(--radius-lg); overflow: hidden; background: linear-gradient(180deg, color-mix(in srgb, var(--color-section) 55%, var(--color-surface)), var(--color-bg) 80%);">
+          <div style="position: absolute; inset: 0; background-image: linear-gradient(color-mix(in srgb, var(--color-accent) 18%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--color-accent) 18%, transparent) 1px, transparent 1px); background-size: 30px 30px; mask-image: linear-gradient(180deg, #000, transparent 80%); -webkit-mask-image: linear-gradient(180deg, #000, transparent 80%);"></div>
+          <img data-parallax="-0.02" src="assets/portrait.png" alt="Евгений Езуб" style="position: relative; width: 100%; filter: grayscale(.32) contrast(1.06) brightness(.95); mask-image: linear-gradient(180deg, #000 74%, transparent 99%); -webkit-mask-image: linear-gradient(180deg, #000 74%, transparent 99%);">
+        </div>
+        <div style="position: absolute; top: -1px; right: -1px; width: 22px; height: 22px; border-top: 1px solid var(--color-accent); border-right: 1px solid var(--color-accent);"></div>
+      </div>
+    </section>
+
+    <section data-timeline style="padding: 40px 0 72px; display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 0 44px;">
+      <div data-reveal style="grid-column: 1 / -1; height: 1px; background: linear-gradient(to right, transparent, var(--color-divider) 48px, var(--color-divider) calc(100% - 48px), transparent); opacity: 0; transition: opacity .7s ease;"></div>
+
+      <div data-reveal style="padding: 40px 0 0; font-family: var(--font-heading); font-size: 13px; letter-spacing: .12em; color: var(--color-accent); opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);">2008–2015</div>
+      <div data-reveal style="padding: 40px 0 44px; opacity: 0; transform: translateY(18px); transition: opacity .7s ease .06s, transform .7s cubic-bezier(.2,.7,.2,1) .06s;">
+        <h2 style="font-size: 26px; letter-spacing: -.025em; margin: 0 0 16px;">Полевая инженерия и весь мир</h2>
+        <p style="margin: 0 0 14px; font-size: 15.5px; line-height: 1.68; max-width: 72ch; color: color-mix(in srgb, var(--color-text) 78%, transparent); text-wrap: pretty;">Инженер технической поддержки в Infinet Wireless — производителе оборудования для беспроводной передачи данных. Ближний Восток, Азия, Европа, Россия: обучал инженеров заказчиков, разворачивал и спасал реальные проекты прямо на объектах.</p>
+        <p style="margin: 0 0 14px; font-size: 15.5px; line-height: 1.68; max-width: 72ch; color: color-mix(in srgb, var(--color-text) 78%, transparent); text-wrap: pretty;">Там я научился двум вещам, которые до сих пор кормят. Первая — чинить то, чего не проектировал. На объекте нет автора системы и нет документации, а связь должна заработать сегодня. Ровно так же я захожу в чужой код.</p>
+        <p style="margin: 0; font-size: 15.5px; line-height: 1.68; max-width: 72ch; color: color-mix(in srgb, var(--color-text) 78%, transparent); text-wrap: pretty;">Вторая — объяснять сложное так, чтобы человек на другом конце понял и смог повторить сам. Инженер из другой страны, с другим языком и другим бэкграундом, должен после тренинга уметь работать без меня. Это и есть та работа, которую я делаю сейчас, когда внедряю AI-инструменты в чужие команды.</p>
+      </div>
+
+      <div data-reveal style="grid-column: 1 / -1; height: 1px; background: linear-gradient(to right, transparent, var(--color-divider) 48px, var(--color-divider) calc(100% - 48px), transparent); opacity: 0; transition: opacity .7s ease;"></div>
+
+      <div data-reveal style="padding: 40px 0 0; font-family: var(--font-heading); font-size: 13px; letter-spacing: .12em; color: var(--color-accent); opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);">Свой бизнес</div>
+      <div data-reveal style="padding: 40px 0 44px; opacity: 0; transform: translateY(18px); transition: opacity .7s ease .06s, transform .7s cubic-bezier(.2,.7,.2,1) .06s;">
+        <h2 style="font-size: 26px; letter-spacing: -.025em; margin: 0 0 16px;">Считать деньги, а не строчки</h2>
+        <p style="margin: 0 0 14px; font-size: 15.5px; line-height: 1.68; max-width: 72ch; color: color-mix(in srgb, var(--color-text) 78%, transparent); text-wrap: pretty;">Несколько лет вёл собственное дело. Знаю, как считаются деньги, почему срок важнее красивой архитектуры и что чувствует заказчик, когда подрядчик пропадает на неделю.</p>
+        <p style="margin: 0; font-size: 15.5px; line-height: 1.68; max-width: 72ch; color: color-mix(in srgb, var(--color-text) 78%, transparent); text-wrap: pretty;">Это меняет то, как я работаю: я не предлагаю технически интересное решение, если есть более дешёвое и скучное.</p>
+      </div>
+
+      <div data-reveal style="grid-column: 1 / -1; height: 1px; background: linear-gradient(to right, transparent, var(--color-divider) 48px, var(--color-divider) calc(100% - 48px), transparent); opacity: 0; transition: opacity .7s ease;"></div>
+
+      <div data-reveal style="padding: 40px 0 0; font-family: var(--font-heading); font-size: 13px; letter-spacing: .12em; color: var(--color-accent); opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);">Управление</div>
+      <div data-reveal style="padding: 40px 0 44px; opacity: 0; transform: translateY(18px); transition: opacity .7s ease .06s, transform .7s cubic-bezier(.2,.7,.2,1) .06s;">
+        <h2 style="font-size: 26px; letter-spacing: -.025em; margin: 0 0 16px;">Проекты в диджитал-агентстве</h2>
+        <p style="margin: 0 0 14px; font-size: 15.5px; line-height: 1.68; max-width: 72ch; color: color-mix(in srgb, var(--color-text) 78%, transparent); text-wrap: pretty;">Менеджер проектов: руководил созданием сайтов для крупных клиентов агентства — среди них Huawei, Philips, Microsoft.</p>
+        <p style="margin: 0 0 18px; font-size: 15.5px; line-height: 1.68; max-width: 72ch; color: color-mix(in srgb, var(--color-text) 78%, transparent); text-wrap: pretty;">Здесь я увидел разработку со стороны бизнеса: как формулируется задача, как согласовывается результат, почему проекты срываются и как звучит «нет» от клиента, которому не объяснили, за что он платит.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+          <span class="tag tag-neutral">Huawei</span>
+          <span class="tag tag-neutral">Philips</span>
+          <span class="tag tag-neutral">Microsoft</span>
+        </div>
+      </div>
+
+      <div data-reveal style="grid-column: 1 / -1; height: 1px; background: linear-gradient(to right, transparent, var(--color-divider) 48px, var(--color-divider) calc(100% - 48px), transparent); opacity: 0; transition: opacity .7s ease;"></div>
+
+      <div data-reveal style="padding: 40px 0 0; font-family: var(--font-heading); font-size: 13px; letter-spacing: .12em; color: var(--color-accent); opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);">2019 — сегодня</div>
+      <div data-reveal style="padding: 40px 0 44px; opacity: 0; transform: translateY(18px); transition: opacity .7s ease .06s, transform .7s cubic-bezier(.2,.7,.2,1) .06s;">
+        <h2 style="font-size: 26px; letter-spacing: -.025em; margin: 0 0 16px;">Разработка и свои продукты</h2>
+        <p style="margin: 0 0 14px; font-size: 15.5px; line-height: 1.68; max-width: 72ch; color: color-mix(in srgb, var(--color-text) 78%, transparent); text-wrap: pretty;">От разработчика до iOS Team Lead с командой из пяти инженеров. Мигрировал продукт с UIKit на SwiftUI, выстраивал код-ревью и юнит-тесты, чинил гонки данных в realtime-системах с деньгами внутри, доводил приложение с аудиторией 1,5 млн DAU до нулевого краш-рейта.</p>
+        <p style="margin: 0 0 14px; font-size: 15.5px; line-height: 1.68; max-width: 72ch; color: color-mix(in srgb, var(--color-text) 78%, transparent); text-wrap: pretty;">Параллельно строю свои продукты. Три приложения в сторах, каждое со своим бэкендом, аналитикой, подписками, релизным пайплайном и живыми платящими пользователями. И весь обвес вокруг: A/B-тесты цены, автоматизация публикаций, AI-контуры для генерации гипотез.</p>
+        <p style="margin: 0; font-size: 15.5px; line-height: 1.68; max-width: 72ch; color: var(--color-accent-300); text-wrap: pretty;">Свои продукты — самая честная школа. Здесь нет заказчика, на которого можно списать провал: если подписку не покупают, виноват только ты.</p>
+      </div>
+    </section>
+
+    <section data-reveal style="padding: 24px 0 72px; opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);">
+      <h2 style="font-size: clamp(26px, 3.2vw, 36px); letter-spacing: -.025em; margin: 0 0 28px;">Во что я верю</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;">
+        <div style="background: var(--color-surface); border: 1px solid var(--color-divider); border-radius: var(--radius-md); padding: 22px;" style-hover="border-color: color-mix(in srgb, var(--color-accent) 55%, transparent);">
+          <h4 style="font-size: 17px; margin: 0 0 8px;">Простое решение лучше умного</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.6; color: color-mix(in srgb, var(--color-text) 74%, transparent);">Если можно 50 строками вместо 200 — надо 50.</p>
+        </div>
+        <div style="background: var(--color-surface); border: 1px solid var(--color-divider); border-radius: var(--radius-md); padding: 22px;" style-hover="border-color: color-mix(in srgb, var(--color-accent) 55%, transparent);">
+          <h4 style="font-size: 17px; margin: 0 0 8px;">Работающая сборка каждую неделю</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.6; color: color-mix(in srgb, var(--color-text) 74%, transparent);">Не отчёт о прогрессе, а то, что можно установить и потрогать.</p>
+        </div>
+        <div style="background: var(--color-surface); border: 1px solid var(--color-divider); border-radius: var(--radius-md); padding: 22px;" style-hover="border-color: color-mix(in srgb, var(--color-accent) 55%, transparent);">
+          <h4 style="font-size: 17px; margin: 0 0 8px;">Честная оценка вместо приятной</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.6; color: color-mix(in srgb, var(--color-text) 74%, transparent);">Лучше сказать «дорого и долго» на входе, чем «почти готово» три месяца подряд.</p>
+        </div>
+        <div style="background: var(--color-surface); border: 1px solid var(--color-divider); border-radius: var(--radius-md); padding: 22px;" style-hover="border-color: color-mix(in srgb, var(--color-accent) 55%, transparent);">
+          <h4 style="font-size: 17px; margin: 0 0 8px;">Всё принадлежит клиенту</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.6; color: color-mix(in srgb, var(--color-text) 74%, transparent);">Код, ключи, доступы, инфраструктура. Привязка к подрядчику — это не бизнес-модель, это заложничество.</p>
+        </div>
+      </div>
+    </section>
+
+    <section data-reveal style="padding: 0 0 72px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);">
+      <div style="padding-top: 20px; border-top: 1px solid var(--color-divider);">
+        <h4 style="font-size: 17px; margin: 0 0 8px;">Образование</h4>
+        <p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: color-mix(in srgb, var(--color-text) 74%, transparent);">Высшее, специалист. Математика и механика, компьютерные науки.</p>
+      </div>
+      <div style="padding-top: 20px; border-top: 1px solid color-mix(in srgb, var(--color-accent) 60%, transparent);">
+        <h4 style="font-size: 17px; margin: 0 0 8px;">Сейчас</h4>
+        <p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: color-mix(in srgb, var(--color-text) 74%, transparent);">Работаю удалённо с клиентами по всему миру — восьмой год. Беру ограниченное число проектов одновременно, чтобы каждый двигался, а не стоял в очереди.</p>
+      </div>
+    </section>
+
+    <section data-reveal style="padding: 0 0 96px; opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);">
+      <div style="position: relative; overflow: hidden; border: 1px solid color-mix(in srgb, var(--color-accent) 34%, transparent); border-radius: var(--radius-lg); padding: 48px 40px; background: linear-gradient(140deg, var(--color-section) 0%, color-mix(in srgb, var(--color-section) 40%, var(--color-bg)) 55%, var(--color-bg) 100%);">
+        <div style="position: absolute; inset: 0; background-image: linear-gradient(color-mix(in srgb, var(--color-section-ghost) 40%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--color-section-ghost) 40%, transparent) 1px, transparent 1px); background-size: 44px 44px; mask-image: radial-gradient(90% 120% at 100% 0%, #000, transparent 70%); -webkit-mask-image: radial-gradient(90% 120% at 100% 0%, #000, transparent 70%);"></div>
+        <div style="position: relative;">
+          <h2 style="font-size: clamp(26px, 3.4vw, 40px); letter-spacing: -.03em; margin: 0 0 24px; max-width: 24ch; text-wrap: balance;">Расскажите задачу — назову срок и цену</h2>
+          <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+            <a href="https://t.me/johnyezub" target="_blank" rel="noopener" class="btn btn-primary" style="font-size: 15px; padding: 12px 20px;">Обсудить задачу →</a>
+            <a href="Лендинг Yezub.dc.html#work" class="btn btn-secondary" style="font-size: 15px; padding: 12px 20px;">Смотреть проекты →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer style="position: relative; z-index: 1; border-top: 1px solid var(--color-divider);">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 26px 28px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; font-size: 13px; color: color-mix(in srgb, var(--color-text) 55%, transparent);">
+      <span>Евгений Езуб · Мобильные приложения, AI-автоматизация и рост продуктов</span>
+      <span style="display: flex; gap: 18px;">
+        <a href="https://t.me/johnyezub" target="_blank" rel="noopener" style="text-decoration: none;">Telegram</a>
+        <a href="mailto:y.yezub@gmail.com" style="text-decoration: none;">y.yezub@gmail.com</a>
+        <a href="Лендинг Yezub.dc.html" style="text-decoration: none;">На главную</a>
+      </span>
+    </div>
+  </footer>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;animate&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Движение&quot;},&quot;parallax&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Движение&quot;},&quot;techGrid&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Оформление&quot;}}">
+class Component extends DCLogic {
+  componentDidMount() {
+    this.onScroll = () => {
+      if (this.props.parallax === false) return;
+      const y = window.scrollY;
+      document.querySelectorAll('[data-parallax]').forEach(el => {
+        el.style.transform = 'translate3d(0,' + (y * parseFloat(el.dataset.parallax)).toFixed(1) + 'px,0)';
+      });
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    this.sweep();
+    this.timer = setInterval(() => this.sweep(), 400);
+    setTimeout(() => clearInterval(this.timer), 8000);
+    this.applyProps();
+  }
+  componentDidUpdate() { this.applyProps(); }
+  componentWillUnmount() {
+    clearInterval(this.timer);
+    window.removeEventListener('scroll', this.onScroll);
+  }
+  applyProps() {
+    const grid = document.querySelector('[data-grid]');
+    if (grid) grid.style.display = this.props.techGrid === false ? 'none' : 'block';
+  }
+  sweep() {
+    if (!this.io) {
+      this.io = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (!e.isIntersecting) return;
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'none';
+          this.io.unobserve(e.target);
+        });
+      }, { rootMargin: '0px 0px -6% 0px' });
+    }
+    document.querySelectorAll('[data-reveal]:not([data-seen])').forEach(el => {
+      el.setAttribute('data-seen', '1');
+      if (this.props.animate === false) { el.style.opacity = '1'; el.style.transform = 'none'; return; }
+      this.io.observe(el);
+    });
+  }
+}
+</script>
+</body>
+</html>

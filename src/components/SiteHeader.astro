@@ -1,0 +1,85 @@
+---
+import type { Lang } from '../i18n';
+import { content, localizePath, alternatePath } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  page: 'home' | 'about';
+}
+
+const { lang, page } = Astro.props;
+const t = content[lang];
+
+const home = localizePath('/', lang);
+const about = localizePath('/about', lang);
+const onHome = page === 'home';
+
+// Section anchors live on the landing page; prefix them when we're on /about.
+const servicesHref = onHome ? '#services' : `${home}#services`;
+const workHref = onHome ? '#work' : `${home}#work`;
+
+const otherLangHref = alternatePath(page, lang);
+const linkColor = 'color-mix(in srgb, var(--color-text) 78%, transparent)';
+const activeColor = 'var(--color-accent)';
+
+const initials = lang === 'ru' ? 'ЕЕ' : 'YY';
+---
+
+<header
+  style="position: sticky; top: 0; z-index: 40; backdrop-filter: blur(14px); background: color-mix(in srgb, var(--color-bg) 82%, transparent); border-bottom: 1px solid var(--color-divider);"
+>
+  <nav
+    data-nav
+    style="max-width: 1180px; margin: 0 auto; padding: 14px 28px; display: flex; align-items: center; gap: 28px;"
+  >
+    <a
+      href={onHome ? '#top' : home}
+      style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--color-text); margin-right: auto;"
+    >
+      <span
+        style="width: 26px; height: 26px; border-radius: var(--radius-sm); border: 1px solid var(--color-accent); display: grid; place-items: center; font-size: 12px; letter-spacing: -.02em; color: var(--color-accent);"
+        >{initials}</span
+      >
+      <span style="font-family: var(--font-heading); font-weight: 500; font-size: 16px;">{t.nav.name}</span>
+    </a>
+    <div style="display: flex; align-items: center; gap: 24px; font-size: 14px;">
+      <a href={servicesHref} style={`text-decoration: none; color: ${linkColor};`} style-hover="color: var(--color-accent);">{t.nav.services}</a>
+      <a href={workHref} style={`text-decoration: none; color: ${linkColor};`} style-hover="color: var(--color-accent);">{t.nav.work}</a>
+      {
+        onHome ? (
+          <a href={about} style={`text-decoration: none; color: ${linkColor};`} style-hover="color: var(--color-accent);">{t.nav.about}</a>
+        ) : (
+          <a href="#top" style={`text-decoration: none; color: ${activeColor};`}>{t.nav.about}</a>
+        )
+      }
+      {onHome && <a href="#faq" style={`text-decoration: none; color: ${linkColor};`} style-hover="color: var(--color-accent);">{t.nav.faq}</a>}
+    </div>
+    <div
+      style="display: flex; align-items: center; gap: 2px; border: 1px solid var(--color-divider); border-radius: var(--radius-md); padding: 2px; font-size: 12px;"
+    >
+      <a
+        href={lang === 'ru' ? undefined : otherLangHref}
+        aria-current={lang === 'ru' ? 'true' : undefined}
+        style={
+          lang === 'ru'
+            ? 'padding: 4px 9px; border-radius: 6px; color: var(--color-accent); box-shadow: inset 0 0 0 1px var(--color-accent); text-decoration: none;'
+            : 'padding: 4px 9px; border-radius: 6px; color: color-mix(in srgb, var(--color-text) 55%, transparent); text-decoration: none;'
+        }
+        style-hover={lang === 'ru' ? undefined : 'color: var(--color-accent);'}
+        >RU</a
+      >
+      <a
+        href={lang === 'en' ? undefined : otherLangHref}
+        aria-current={lang === 'en' ? 'true' : undefined}
+        style={
+          lang === 'en'
+            ? 'padding: 4px 9px; border-radius: 6px; color: var(--color-accent); box-shadow: inset 0 0 0 1px var(--color-accent); text-decoration: none;'
+            : 'padding: 4px 9px; border-radius: 6px; color: color-mix(in srgb, var(--color-text) 55%, transparent); text-decoration: none;'
+        }
+        style-hover={lang === 'en' ? undefined : 'color: var(--color-accent);'}
+        >EN</a
+      >
+    </div>
+    <a href="https://t.me/johnyezub" target="_blank" rel="noopener" class="btn btn-primary">{t.nav.contact}</a>
+  </nav>
+</header>

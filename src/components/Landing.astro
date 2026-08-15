@@ -1,0 +1,251 @@
+---
+import type { Lang } from '../i18n';
+import { content, localizePath } from '../i18n';
+import ServiceCard from './ServiceCard.astro';
+import ProjectCard from './ProjectCard.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = content[lang];
+const aboutHref = localizePath('/about', lang);
+---
+
+<div
+  style="position: relative; background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); min-height: 100vh; overflow: hidden;"
+>
+  <div
+    data-grid
+    style="position: absolute; inset: 0; height: 3200px; pointer-events: none; z-index: 0; background-image: linear-gradient(var(--color-divider) 1px, transparent 1px), linear-gradient(90deg, var(--color-divider) 1px, transparent 1px); background-size: 88px 88px; opacity: .28; mask-image: radial-gradient(120% 70% at 70% 0%, #000 0%, transparent 72%); -webkit-mask-image: radial-gradient(120% 70% at 70% 0%, #000 0%, transparent 72%);"
+  >
+  </div>
+  <div
+    data-parallax="0.08"
+    style="position: absolute; top: -320px; right: -180px; width: 900px; height: 900px; pointer-events: none; z-index: 0; background: radial-gradient(circle, color-mix(in srgb, var(--color-accent) 26%, transparent) 0%, transparent 62%); filter: blur(20px); animation: noct-drift 18s ease-in-out infinite;"
+  >
+  </div>
+  <div
+    data-parallax="0.04"
+    style="position: absolute; top: 900px; left: -300px; width: 760px; height: 760px; pointer-events: none; z-index: 0; background: radial-gradient(circle, color-mix(in srgb, var(--color-section-glow) 34%, transparent) 0%, transparent 64%); filter: blur(24px); animation: noct-drift 26s ease-in-out infinite reverse;"
+  >
+  </div>
+
+  <slot name="header" />
+
+  <main id="top" style="position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; padding: 0 28px;">
+    <!-- Hero -->
+    <section
+      data-hero
+      style="display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 56px; align-items: center; padding: 96px 0 88px;"
+    >
+      <div>
+        <div
+          data-reveal
+          style="display: inline-flex; align-items: center; gap: 10px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--color-accent-300); margin-bottom: 26px; opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);"
+        >
+          <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--color-accent); box-shadow: 0 0 12px var(--color-accent); animation: noct-pulse 2.4s ease-in-out infinite;"></span>
+          {t.hero.eyebrow}
+        </div>
+        <h1
+          data-reveal
+          style="font-size: clamp(40px, 5.4vw, 68px); line-height: 1.04; letter-spacing: -.03em; margin: 0 0 24px; max-width: 15ch; text-wrap: balance; opacity: 0; transform: translateY(18px); transition: opacity .7s ease .06s, transform .7s cubic-bezier(.2,.7,.2,1) .06s;"
+        >
+          {t.hero.h1}
+        </h1>
+        <p
+          data-reveal
+          style="font-size: 17px; line-height: 1.6; max-width: 56ch; color: color-mix(in srgb, var(--color-text) 74%, transparent); margin: 0 0 32px; text-wrap: pretty; opacity: 0; transform: translateY(18px); transition: opacity .7s ease .12s, transform .7s cubic-bezier(.2,.7,.2,1) .12s;"
+        >
+          {t.hero.sub}
+        </p>
+        <div
+          data-reveal
+          style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-bottom: 44px; opacity: 0; transform: translateY(18px); transition: opacity .7s ease .18s, transform .7s cubic-bezier(.2,.7,.2,1) .18s;"
+        >
+          <a href="https://t.me/johnyezub" target="_blank" rel="noopener" class="btn btn-primary" style="font-size: 15px; padding: 12px 20px;">{t.hero.cta}</a>
+          <span style="font-size: 13px; color: color-mix(in srgb, var(--color-text) 55%, transparent);">{t.hero.ctaNote}</span>
+        </div>
+        <div
+          data-reveal
+          style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--color-divider); border: 1px solid var(--color-divider); border-radius: var(--radius-md); overflow: hidden; opacity: 0; transform: translateY(18px); transition: opacity .7s ease .24s, transform .7s cubic-bezier(.2,.7,.2,1) .24s;"
+        >
+          {
+            t.hero.stats.map((s) => (
+              <div style="background: var(--color-bg); padding: 18px 20px;" style-hover="background: color-mix(in srgb, var(--color-accent) 8%, var(--color-bg));">
+                <div style="font-family: var(--font-heading); font-size: 30px; letter-spacing: -.03em; color: var(--color-accent-300);">{s.n}</div>
+                <div style="font-size: 12px; color: color-mix(in srgb, var(--color-text) 58%, transparent); margin-top: 4px;">{s.label}</div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <div
+        data-reveal
+        style="position: relative; width: 100%; max-width: 300px; margin-left: auto; opacity: 0; transform: translateY(18px); transition: opacity .9s ease .2s, transform .9s cubic-bezier(.2,.7,.2,1) .2s;"
+      >
+        <div style="position: relative; border: 1px solid var(--color-divider); border-radius: var(--radius-lg); overflow: hidden; background: linear-gradient(180deg, color-mix(in srgb, var(--color-accent) 12%, var(--color-surface)) 0%, var(--color-bg) 78%);">
+          <div style="position: absolute; inset: 0; background-image: linear-gradient(color-mix(in srgb, var(--color-accent) 22%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--color-accent) 22%, transparent) 1px, transparent 1px); background-size: 34px 34px; mask-image: linear-gradient(180deg, #000 0%, transparent 78%); -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 78%);"></div>
+          <div style="position: absolute; left: 0; right: 0; top: 0; height: 120px; background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--color-accent) 30%, transparent), transparent); animation: noct-scan 7s linear infinite;"></div>
+          <img data-parallax="-0.03" src="/assets/portrait.png" alt={t.nav.name} style="position: relative; display: block; width: 100%; filter: grayscale(.28) contrast(1.06) brightness(.96); mask-image: linear-gradient(180deg, #000 72%, transparent 99%); -webkit-mask-image: linear-gradient(180deg, #000 72%, transparent 99%);" />
+          <div style="position: absolute; left: 18px; bottom: 18px; display: flex; gap: 6px;">
+            {t.hero.badges.map((b) => <span class="tag tag-outline">{b}</span>)}
+          </div>
+        </div>
+        <div style="position: absolute; top: -1px; left: -1px; width: 22px; height: 22px; border-top: 1px solid var(--color-accent); border-left: 1px solid var(--color-accent);"></div>
+        <div style="position: absolute; bottom: -1px; right: -1px; width: 22px; height: 22px; border-bottom: 1px solid var(--color-accent); border-right: 1px solid var(--color-accent);"></div>
+      </div>
+    </section>
+
+    <!-- Problems -->
+    <section data-reveal style="padding: 72px 0; opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);">
+      <h2 style="font-size: clamp(28px, 3.4vw, 40px); letter-spacing: -.025em; margin: 0 0 36px;">{t.problems.title}</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: var(--color-divider); border-top: 1px solid var(--color-divider); border-bottom: 1px solid var(--color-divider);">
+        {
+          t.problems.items.map((item, i) => (
+            <div style="background: var(--color-bg); padding: 24px 22px; display: flex; gap: 14px;" style-hover="background: var(--color-surface);">
+              <span style="font-size: 11px; letter-spacing: .1em; color: var(--color-accent); padding-top: 3px;">{String(i + 1).padStart(2, '0')}</span>
+              <p style="margin: 0; font-size: 15px; line-height: 1.55; color: color-mix(in srgb, var(--color-text) 80%, transparent);">{item}</p>
+            </div>
+          ))
+        }
+        <div style="background: color-mix(in srgb, var(--color-accent) 10%, var(--color-bg)); padding: 24px 22px; display: flex; align-items: center;">
+          <p style="margin: 0; font-size: 15px; line-height: 1.55;"><strong style="font-weight: 500;">{t.problems.conclusionStrong}</strong>{t.problems.conclusionRest}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" style="padding: 72px 0;">
+      <div
+        data-reveal
+        style="display: flex; align-items: baseline; justify-content: space-between; gap: 24px; flex-wrap: wrap; margin-bottom: 12px; opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);"
+      >
+        <h2 style="font-size: clamp(28px, 3.4vw, 40px); letter-spacing: -.025em; margin: 0;">{t.services.title}</h2>
+        <span style="font-size: 13px; color: color-mix(in srgb, var(--color-text) 50%, transparent);">{t.services.hint}</span>
+      </div>
+
+      <div
+        data-reveal
+        style="display: flex; align-items: center; gap: 14px; margin: 44px 0 20px; opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);"
+      >
+        <span style="font-family: var(--font-heading); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--color-accent);">{t.services.trackA}</span>
+        <span style="flex: 1; height: 1px; background: linear-gradient(to right, var(--color-divider), transparent);"></span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;">
+        {t.services.cardsA.map((card) => <ServiceCard card={card} />)}
+      </div>
+
+      <div
+        data-reveal
+        style="display: flex; align-items: center; gap: 14px; margin: 48px 0 20px; opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);"
+      >
+        <span style="font-family: var(--font-heading); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--color-accent);">{t.services.trackB}</span>
+        <span style="flex: 1; height: 1px; background: linear-gradient(to right, var(--color-divider), transparent);"></span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;">
+        {t.services.cardsB.map((card) => <ServiceCard card={card} />)}
+      </div>
+
+      <div
+        data-reveal
+        style="margin-top: 32px; padding: 26px 28px; border: 1px solid color-mix(in srgb, var(--color-accent) 40%, transparent); border-radius: var(--radius-md); background: color-mix(in srgb, var(--color-accent) 8%, transparent); display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);"
+      >
+        <p style="margin: 0; font-size: 15px; max-width: 62ch;"><strong style="font-weight: 500;">{t.services.noteStrong}</strong>{t.services.noteRest}</p>
+        <a href="https://t.me/johnyezub" target="_blank" rel="noopener" class="btn btn-primary" style="font-size: 15px; padding: 11px 18px;">{t.services.noteCta}</a>
+      </div>
+    </section>
+
+    <!-- Work -->
+    <section id="work" style="padding: 72px 0;">
+      <h2
+        data-reveal
+        style="font-size: clamp(28px, 3.4vw, 40px); letter-spacing: -.025em; margin: 0 0 36px; opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);"
+      >
+        {t.work.title}
+      </h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px;">
+        {t.work.projects.map((project) => <ProjectCard project={project} />)}
+      </div>
+    </section>
+
+    <!-- About teaser -->
+    <section data-reveal style="padding: 72px 0; opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);">
+      <div
+        data-aboutrow
+        style="display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 44px; align-items: center; border: 1px solid var(--color-divider); border-radius: var(--radius-lg); padding: 32px; background: linear-gradient(120deg, color-mix(in srgb, var(--color-section) 40%, var(--color-bg)), var(--color-bg) 70%);"
+      >
+        <div style="position: relative; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--color-divider); background: var(--color-surface);">
+          <div style="position: absolute; inset: 0; background-image: linear-gradient(90deg, color-mix(in srgb, var(--color-accent) 20%, transparent) 1px, transparent 1px); background-size: 22px 22px;"></div>
+          <img src="/assets/portrait.png" alt={t.nav.name} style="position: relative; width: 100%; filter: grayscale(.5) contrast(1.05) brightness(.92);" />
+        </div>
+        <div>
+          <h2 style="font-size: clamp(26px, 3vw, 34px); letter-spacing: -.025em; margin: 0 0 14px;">{t.aboutTeaser.title}</h2>
+          <p style="margin: 0 0 18px; font-size: 15.5px; line-height: 1.65; color: color-mix(in srgb, var(--color-text) 78%, transparent); max-width: 62ch; text-wrap: pretty;">{t.aboutTeaser.text}</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px;">
+            {t.aboutTeaser.tags.map((tag) => <span class="tag tag-outline">{tag}</span>)}
+          </div>
+          <a href={aboutHref} class="btn btn-primary">{t.aboutTeaser.cta}</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process -->
+    <section data-reveal style="padding: 72px 0; opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);">
+      <h2 style="font-size: clamp(28px, 3.4vw, 40px); letter-spacing: -.025em; margin: 0 0 36px;">{t.process.title}</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 24px;">
+        {
+          t.process.steps.map((s) => (
+            <div style={`padding-top: 20px; border-top: 1px solid ${s.active ? 'color-mix(in srgb, var(--color-accent) 60%, transparent)' : 'var(--color-divider)'};`}>
+              <div style="font-family: var(--font-heading); font-size: 12px; letter-spacing: .14em; color: var(--color-accent); margin-bottom: 12px;">{s.step}</div>
+              <h4 style="font-size: 18px; margin: 0 0 8px;">{s.title}</h4>
+              <p style="margin: 0; font-size: 14px; line-height: 1.6; color: color-mix(in srgb, var(--color-text) 72%, transparent);">{s.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" style="padding: 72px 0;">
+      <h2
+        data-reveal
+        style="font-size: clamp(28px, 3.4vw, 40px); letter-spacing: -.025em; margin: 0 0 32px; opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);"
+      >
+        {t.faq.title}
+      </h2>
+      <div data-reveal style="border-top: 1px solid var(--color-divider); opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);">
+        {
+          t.faq.items.map((item) => (
+            <details style="border-bottom: 1px solid var(--color-divider); padding: 20px 4px;">
+              <summary style="display: flex; align-items: center; justify-content: space-between; gap: 20px; font-family: var(--font-heading); font-size: 17px;" style-hover="color: var(--color-accent);">
+                {item.q}
+                <span style="color: var(--color-accent);">+</span>
+              </summary>
+              <p style="margin: 14px 0 0; font-size: 14.5px; line-height: 1.65; color: color-mix(in srgb, var(--color-text) 76%, transparent); max-width: 78ch;">{item.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section data-reveal style="padding: 88px 0 96px; opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);">
+      <div style="position: relative; overflow: hidden; border: 1px solid color-mix(in srgb, var(--color-accent) 34%, transparent); border-radius: var(--radius-lg); padding: 56px 44px; background: linear-gradient(140deg, var(--color-section) 0%, color-mix(in srgb, var(--color-section) 45%, var(--color-bg)) 55%, var(--color-bg) 100%);">
+        <div style="position: absolute; inset: 0; background-image: linear-gradient(color-mix(in srgb, var(--color-section-ghost) 40%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--color-section-ghost) 40%, transparent) 1px, transparent 1px); background-size: 44px 44px; mask-image: radial-gradient(90% 120% at 100% 0%, #000, transparent 70%); -webkit-mask-image: radial-gradient(90% 120% at 100% 0%, #000, transparent 70%);"></div>
+        <div style="position: relative;">
+          <h2 style="font-size: clamp(30px, 4vw, 48px); letter-spacing: -.03em; margin: 0 0 16px; max-width: 22ch; text-wrap: balance;">{t.finalCta.title}</h2>
+          <p style="margin: 0 0 32px; font-size: 16px; line-height: 1.6; max-width: 60ch; color: color-mix(in srgb, var(--color-text) 80%, transparent);">{t.finalCta.text}</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+            <a href="https://t.me/johnyezub" target="_blank" rel="noopener" class="btn btn-primary" style="font-size: 15px; padding: 12px 20px;">{t.finalCta.telegram}</a>
+            <a href="mailto:y.yezub@gmail.com" class="btn btn-secondary" style="font-size: 15px; padding: 12px 20px;">{t.finalCta.email}</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <slot name="footer" />
+</div>

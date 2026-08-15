@@ -1,0 +1,158 @@
+---
+import type { Lang } from '../i18n';
+import { content, localizePath } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = content[lang];
+const a = t.aboutPage;
+const workHref = `${localizePath('/', lang)}#work`;
+
+const dividerLine =
+  'grid-column: 1 / -1; height: 1px; background: linear-gradient(to right, transparent, var(--color-divider) 48px, var(--color-divider) calc(100% - 48px), transparent); opacity: 0; transition: opacity .7s ease;';
+---
+
+<div
+  style="position: relative; background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); min-height: 100vh; overflow: hidden;"
+>
+  <div
+    data-grid
+    style="position: absolute; inset: 0; height: 2000px; pointer-events: none; z-index: 0; background-image: linear-gradient(var(--color-divider) 1px, transparent 1px), linear-gradient(90deg, var(--color-divider) 1px, transparent 1px); background-size: 88px 88px; opacity: .26; mask-image: radial-gradient(120% 60% at 20% 0%, #000 0%, transparent 70%); -webkit-mask-image: radial-gradient(120% 60% at 20% 0%, #000 0%, transparent 70%);"
+  >
+  </div>
+  <div
+    data-parallax="0.06"
+    style="position: absolute; top: -260px; left: -160px; width: 780px; height: 780px; pointer-events: none; z-index: 0; background: radial-gradient(circle, color-mix(in srgb, var(--color-accent) 22%, transparent) 0%, transparent 62%); filter: blur(20px); animation: noct-drift 22s ease-in-out infinite;"
+  >
+  </div>
+
+  <slot name="header" />
+
+  <main id="top" style="position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; padding: 0 28px;">
+    <!-- Hero -->
+    <section
+      data-hero
+      style="display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: 56px; align-items: end; padding: 88px 0 72px;"
+    >
+      <div>
+        <div
+          data-reveal
+          style="font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--color-accent-300); margin-bottom: 24px; opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);"
+        >
+          {a.eyebrow}
+        </div>
+        <h1
+          data-reveal
+          style="font-size: clamp(36px, 4.6vw, 58px); line-height: 1.06; letter-spacing: -.03em; margin: 0 0 24px; max-width: 20ch; text-wrap: balance; opacity: 0; transform: translateY(18px); transition: opacity .7s ease .06s, transform .7s cubic-bezier(.2,.7,.2,1) .06s;"
+        >
+          {a.h1}
+        </h1>
+        <p
+          data-reveal
+          style="font-size: 17px; line-height: 1.6; max-width: 58ch; color: color-mix(in srgb, var(--color-text) 74%, transparent); margin: 0; text-wrap: pretty; opacity: 0; transform: translateY(18px); transition: opacity .7s ease .12s, transform .7s cubic-bezier(.2,.7,.2,1) .12s;"
+        >
+          {a.lead}
+        </p>
+      </div>
+      <div
+        data-reveal
+        style="position: relative; opacity: 0; transform: translateY(18px); transition: opacity .9s ease .18s, transform .9s cubic-bezier(.2,.7,.2,1) .18s;"
+      >
+        <div style="position: relative; border: 1px solid var(--color-divider); border-radius: var(--radius-lg); overflow: hidden; background: linear-gradient(180deg, color-mix(in srgb, var(--color-section) 55%, var(--color-surface)), var(--color-bg) 80%);">
+          <div style="position: absolute; inset: 0; background-image: linear-gradient(color-mix(in srgb, var(--color-accent) 18%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--color-accent) 18%, transparent) 1px, transparent 1px); background-size: 30px 30px; mask-image: linear-gradient(180deg, #000, transparent 80%); -webkit-mask-image: linear-gradient(180deg, #000, transparent 80%);"></div>
+          <img data-parallax="-0.02" src="/assets/portrait.png" alt={t.nav.name} style="position: relative; width: 100%; filter: grayscale(.32) contrast(1.06) brightness(.95); mask-image: linear-gradient(180deg, #000 74%, transparent 99%); -webkit-mask-image: linear-gradient(180deg, #000 74%, transparent 99%);" />
+        </div>
+        <div style="position: absolute; top: -1px; right: -1px; width: 22px; height: 22px; border-top: 1px solid var(--color-accent); border-right: 1px solid var(--color-accent);"></div>
+      </div>
+    </section>
+
+    <!-- Timeline -->
+    <section data-timeline style="padding: 40px 0 72px; display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 0 44px;">
+      <div data-reveal style={dividerLine}></div>
+      {
+        a.timeline.map((entry) => (
+          <>
+            <div
+              data-reveal
+              style="padding: 40px 0 0; font-family: var(--font-heading); font-size: 13px; letter-spacing: .12em; color: var(--color-accent); opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);"
+            >
+              {entry.period}
+            </div>
+            <div
+              data-reveal
+              style="padding: 40px 0 44px; opacity: 0; transform: translateY(18px); transition: opacity .7s ease .06s, transform .7s cubic-bezier(.2,.7,.2,1) .06s;"
+            >
+              <h2 style="font-size: 26px; letter-spacing: -.025em; margin: 0 0 16px;">{entry.title}</h2>
+              {entry.paras.map((para, i) => {
+                const last = i === entry.paras.length - 1;
+                const color = last && entry.accentLast
+                  ? 'var(--color-accent-300)'
+                  : 'color-mix(in srgb, var(--color-text) 78%, transparent)';
+                const mb = last ? (entry.tags ? '18px' : '0') : '14px';
+                return (
+                  <p style={`margin: 0 0 ${mb}; font-size: 15.5px; line-height: 1.68; max-width: 72ch; color: ${color}; text-wrap: pretty;`}>
+                    {para}
+                  </p>
+                );
+              })}
+              {entry.tags && (
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                  {entry.tags.map((tag) => (
+                    <span class="tag tag-neutral">{tag}</span>
+                  ))}
+                </div>
+              )}
+            </div>
+            <div data-reveal style={dividerLine}></div>
+          </>
+        ))
+      }
+    </section>
+
+    <!-- Beliefs -->
+    <section data-reveal style="padding: 24px 0 72px; opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);">
+      <h2 style="font-size: clamp(26px, 3.2vw, 36px); letter-spacing: -.025em; margin: 0 0 28px;">{a.beliefTitle}</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;">
+        {
+          a.beliefs.map((b) => (
+            <div style="background: var(--color-surface); border: 1px solid var(--color-divider); border-radius: var(--radius-md); padding: 22px;" style-hover="border-color: color-mix(in srgb, var(--color-accent) 55%, transparent);">
+              <h4 style="font-size: 17px; margin: 0 0 8px;">{b.title}</h4>
+              <p style="margin: 0; font-size: 14px; line-height: 1.6; color: color-mix(in srgb, var(--color-text) 74%, transparent);">{b.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Education / Now -->
+    <section data-reveal style="padding: 0 0 72px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);">
+      <div style="padding-top: 20px; border-top: 1px solid var(--color-divider);">
+        <h4 style="font-size: 17px; margin: 0 0 8px;">{a.eduTitle}</h4>
+        <p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: color-mix(in srgb, var(--color-text) 74%, transparent);">{a.eduText}</p>
+      </div>
+      <div style="padding-top: 20px; border-top: 1px solid color-mix(in srgb, var(--color-accent) 60%, transparent);">
+        <h4 style="font-size: 17px; margin: 0 0 8px;">{a.nowTitle}</h4>
+        <p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: color-mix(in srgb, var(--color-text) 74%, transparent);">{a.nowText}</p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section data-reveal style="padding: 0 0 96px; opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);">
+      <div style="position: relative; overflow: hidden; border: 1px solid color-mix(in srgb, var(--color-accent) 34%, transparent); border-radius: var(--radius-lg); padding: 48px 40px; background: linear-gradient(140deg, var(--color-section) 0%, color-mix(in srgb, var(--color-section) 40%, var(--color-bg)) 55%, var(--color-bg) 100%);">
+        <div style="position: absolute; inset: 0; background-image: linear-gradient(color-mix(in srgb, var(--color-section-ghost) 40%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--color-section-ghost) 40%, transparent) 1px, transparent 1px); background-size: 44px 44px; mask-image: radial-gradient(90% 120% at 100% 0%, #000, transparent 70%); -webkit-mask-image: radial-gradient(90% 120% at 100% 0%, #000, transparent 70%);"></div>
+        <div style="position: relative;">
+          <h2 style="font-size: clamp(26px, 3.4vw, 40px); letter-spacing: -.03em; margin: 0 0 24px; max-width: 24ch; text-wrap: balance;">{a.ctaTitle}</h2>
+          <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+            <a href="https://t.me/johnyezub" target="_blank" rel="noopener" class="btn btn-primary" style="font-size: 15px; padding: 12px 20px;">{a.ctaDiscuss}</a>
+            <a href={workHref} class="btn btn-secondary" style="font-size: 15px; padding: 12px 20px;">{a.ctaWork}</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <slot name="footer" />
+</div>
