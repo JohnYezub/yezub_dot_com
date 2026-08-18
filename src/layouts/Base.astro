@@ -1,6 +1,7 @@
 ---
 import type { Lang } from '../i18n';
 import { content, localizePath } from '../i18n';
+import Analytics from '@vercel/analytics/astro';
 
 interface Props {
   lang: Lang;
@@ -159,6 +160,8 @@ const dsCss = '/_ds/nocturne-351aa211-ca7c-40f8-8901-932d1b5ce83e/styles.css';
   </head>
   <body>
     <slot />
+
+    <Analytics />
 
     <script is:inline>
       (function () {
