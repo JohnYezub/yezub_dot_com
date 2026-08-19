@@ -193,15 +193,22 @@ const dsCss = '/_ds/nocturne-351aa211-ca7c-40f8-8901-932d1b5ce83e/styles.css';
         window.addEventListener('scroll', onScroll, { passive: true });
 
         // style-hover: apply extra inline styles on hover (design-system behaviour).
+        // Read the *current* style at hover time — cards are also [data-reveal], so their
+        // inline style changes from opacity:0 to opacity:1 after they animate in. Caching
+        // the load-time style would re-apply opacity:0 on hover and hide the card.
         document.querySelectorAll('[style-hover]').forEach(function (el) {
           var hover = el.getAttribute('style-hover');
-          var base = el.getAttribute('style') || '';
-          var sep = base && !base.trim().endsWith(';') ? '; ' : ' ';
           el.addEventListener('pointerenter', function () {
-            el.setAttribute('style', base + sep + hover);
+            var cur = el.getAttribute('style') || '';
+            el.setAttribute('data-style-base', cur);
+            var sep = cur && !cur.trim().endsWith(';') ? '; ' : ' ';
+            el.setAttribute('style', cur + sep + hover);
           });
           el.addEventListener('pointerleave', function () {
-            el.setAttribute('style', base);
+            if (el.hasAttribute('data-style-base')) {
+              el.setAttribute('style', el.getAttribute('data-style-base'));
+              el.removeAttribute('data-style-base');
+            }
           });
         });
       })();
