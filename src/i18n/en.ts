@@ -12,6 +12,7 @@ export const en: Content = {
     work: 'Work',
     about: 'About',
     faq: 'FAQ',
+    blog: 'Blog',
     contact: 'Get in touch',
     langTitle: 'Russian version',
   },

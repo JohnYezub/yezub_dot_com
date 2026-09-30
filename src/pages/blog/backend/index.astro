@@ -1,0 +1,38 @@
+---
+import Base from '../../../layouts/Base.astro';
+import BlogShell from '../../../components/BlogShell.astro';
+import { backendEntries } from '../../../blog/backend';
+
+const meta = {
+  title: 'Backend Map 2026 — Блог — Евгений Езуб',
+  description: 'Карта современной backend-разработки: задача → класс технологий → выбор → почему. 25 страниц-шпаргалок со схемами.',
+};
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+
+<Base lang="ru" page="blog" meta={meta} path="/blog/backend">
+  <BlogShell>
+    <nav class="crumbs" aria-label="Навигация"><a href="/blog">Блог</a><span>/</span><span>Backend</span></nav>
+    <header style="padding: 28px 0 32px;">
+      <div class="kicker">База знаний · {backendEntries.length} страниц</div>
+      <h1>Backend Map 2026</h1>
+      <p class="lead">
+        Задача → класс технологий → выбор → почему. Технологии — производные, первичны <b>оси компромиссов</b>:
+        не «что лучше», а «что мы готовы отдать». Читай по порядку или выбирай нужную тему.
+      </p>
+    </header>
+    <ol class="toc" style="padding-bottom: 72px;">
+      {
+        backendEntries.map((e, i) => (
+          <li>
+            <a class="card" href={`/blog/backend/${e.slug}`}>
+              <span class="n">{pad(i + 1)}</span>
+              <span class="t">{e.title}</span>
+              <span class="d">{e.lead} <span class="ref">{e.ref}</span></span>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </BlogShell>
+</Base>

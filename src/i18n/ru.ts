@@ -12,6 +12,7 @@ export const ru: Content = {
     work: 'Проекты',
     about: 'Обо мне',
     faq: 'FAQ',
+    blog: 'Блог',
     contact: 'Написать',
     langTitle: 'EN-версия',
   },

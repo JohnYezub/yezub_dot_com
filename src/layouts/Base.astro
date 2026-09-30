@@ -5,14 +5,18 @@ import Analytics from '@vercel/analytics/astro';
 
 interface Props {
   lang: Lang;
-  page: 'home' | 'about';
+  page: 'home' | 'about' | 'blog';
+  /** blog pages: own title/description and path (RU-only, no hreflang pair) */
+  meta?: { title: string; description: string };
+  path?: string;
 }
 
-const { lang, page } = Astro.props;
+const { lang, page, meta: metaProp, path: pathProp } = Astro.props;
 const t = content[lang];
-const meta = page === 'about' ? t.aboutPage.meta : t.meta;
+const meta = metaProp ?? (page === 'about' ? t.aboutPage.meta : t.meta);
 
-const path = page === 'home' ? '/' : '/about';
+const path = pathProp ?? (page === 'home' ? '/' : '/about');
+const ruOnly = page === 'blog';
 const site = Astro.site?.origin ?? 'https://yezub.com';
 const canonical = site + localizePath(path, lang);
 const ruHref = site + localizePath(path, 'ru');
@@ -29,9 +33,9 @@ const dsCss = '/_ds/nocturne-351aa211-ca7c-40f8-8901-932d1b5ce83e/styles.css';
     <title>{meta.title}</title>
     <meta name="description" content={meta.description} />
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="ru" href={ruHref} />
-    <link rel="alternate" hreflang="en" href={enHref} />
-    <link rel="alternate" hreflang="x-default" href={ruHref} />
+    {!ruOnly && <link rel="alternate" hreflang="ru" href={ruHref} />}
+    {!ruOnly && <link rel="alternate" hreflang="en" href={enHref} />}
+    {!ruOnly && <link rel="alternate" hreflang="x-default" href={ruHref} />}
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content={meta.title} />

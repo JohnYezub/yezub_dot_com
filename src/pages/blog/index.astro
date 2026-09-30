@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+import BlogShell from '../../components/BlogShell.astro';
+import { backendEntries } from '../../blog/backend';
+
+const meta = {
+  title: 'Блог — Евгений Езуб',
+  description: 'Короткие базы знаний со схемами и текстами: как устроено и какими решениями какие задачи решать.',
+};
+---
+
+<Base lang="ru" page="blog" meta={meta} path="/blog">
+  <BlogShell>
+    <header style="padding: 56px 0 32px;">
+      <div class="kicker">Блог</div>
+      <h1>Базы знаний</h1>
+      <p class="lead">Короткие шпаргалки со схемами: что где устроено, какими решениями какие задачи решать и что для чего нужно.</p>
+    </header>
+    <ul class="toc" style="padding-bottom: 72px;">
+      <li>
+        <a class="card" href="/blog/backend">
+          <span class="n">01</span>
+          <span class="t">Backend</span>
+          <span class="d">Карта backend-разработки 2026: от осей компромиссов до system design. {backendEntries.length} страниц — схема и тезисы.</span>
+        </a>
+      </li>
+    </ul>
+  </BlogShell>
+</Base>

@@ -1,0 +1,95 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Base from '../../../layouts/Base.astro';
+import BlogShell from '../../../components/BlogShell.astro';
+import { backendEntries } from '../../../blog/backend';
+
+export function getStaticPaths() {
+  return backendEntries.map((entry, i) => ({
+    params: { slug: entry.slug },
+    props: { entry, index: i },
+  }));
+}
+
+const { entry, index } = Astro.props;
+const images = import.meta.glob<{ default: ImageMetadata }>('../../../assets/blog/backend/*.webp', { eager: true });
+const image = images[`../../../assets/blog/backend/${entry.slug}.webp`].default;
+
+const prev = backendEntries[index - 1];
+const next = backendEntries[index + 1];
+const pad = (n: number) => String(n).padStart(2, '0');
+
+const meta = {
+  title: `${entry.title} — Backend Map 2026 — Евгений Езуб`,
+  description: entry.lead,
+};
+---
+
+<Base lang="ru" page="blog" meta={meta} path={`/blog/backend/${entry.slug}`}>
+  <BlogShell>
+    <nav class="crumbs" aria-label="Навигация">
+      <a href="/blog">Блог</a><span>/</span><a href="/blog/backend">Backend</a><span>/</span><span>{pad(index + 1)}</span>
+    </nav>
+    <header style="padding: 28px 0 0;">
+      <div class="kicker">{pad(index + 1)} / {backendEntries.length} · {entry.ref}</div>
+      <h1>{entry.title}</h1>
+      <p class="lead">{entry.lead}</p>
+    </header>
+
+    <a class="figure" href={image.src} target="_blank" rel="noopener" aria-label="Открыть схему в полном размере">
+      <Image src={image} alt={`Схема: ${entry.title}`} widths={[640, 960, 1536]} sizes="(max-width: 1236px) 100vw, 1180px" loading="eager" />
+    </a>
+    <div class="figcap muted">Нажми на схему, чтобы открыть в полном размере.</div>
+
+    <div class="grid2">
+      <section class="panel">
+        <h2>Главное</h2>
+        <ul>{entry.points.map((p) => <li set:html={p} />)}</ul>
+      </section>
+      <div class="stack">
+        {
+          entry.example && (
+            <section class="panel">
+              <h2>{entry.example.title}</h2>
+              <pre><code>{entry.example.code}</code></pre>
+            </section>
+          )
+        }
+        {
+          entry.pick && (
+            <section class="panel">
+              <h2>Что когда выбирать</h2>
+              <ul>{entry.pick.map((p) => <li set:html={p} />)}</ul>
+            </section>
+          )
+        }
+        {
+          entry.warn && (
+            <section class="panel warn">
+              <h2>{entry.warn.title}</h2>
+              <p>{entry.warn.text}</p>
+            </section>
+          )
+        }
+      </div>
+    </div>
+
+    <nav class="pager" aria-label="Соседние страницы">
+      {
+        prev ? (
+          <a class="card" href={`/blog/backend/${prev.slug}`}><small>← {pad(index)}</small><span>{prev.title}</span></a>
+        ) : (
+          <a class="card" href="/blog/backend"><small>←</small><span>Оглавление</span></a>
+        )
+      }
+      {
+        next ? (
+          <a class="card next" href={`/blog/backend/${next.slug}`}><small>{pad(index + 2)} →</small><span>{next.title}</span></a>
+        ) : (
+          <a class="card next" href="/blog/backend"><small>Конец →</small><span>Оглавление</span></a>
+        )
+      }
+    </nav>
+  </BlogShell>
+</Base>

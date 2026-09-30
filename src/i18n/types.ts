@@ -74,6 +74,7 @@ export interface Content {
     work: string;
     about: string;
     faq: string;
+    blog: string;
     contact: string;
     langTitle: string; // tooltip on the inactive language chip (unused when linked)
   };

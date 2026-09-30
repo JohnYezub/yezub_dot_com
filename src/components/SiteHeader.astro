@@ -4,7 +4,7 @@ import { content, localizePath, alternatePath } from '../i18n';
 
 interface Props {
   lang: Lang;
-  page: 'home' | 'about';
+  page: 'home' | 'about' | 'blog';
 }
 
 const { lang, page } = Astro.props;
@@ -12,13 +12,15 @@ const t = content[lang];
 
 const home = localizePath('/', lang);
 const about = localizePath('/about', lang);
+// The blog is Russian-only for now, so its link is the same in both languages.
+const blog = '/blog';
 const onHome = page === 'home';
 
 // Section anchors live on the landing page; prefix them when we're on /about.
 const servicesHref = onHome ? '#services' : `${home}#services`;
 const workHref = onHome ? '#work' : `${home}#work`;
 
-const otherLangHref = alternatePath(page, lang);
+const otherLangHref = page === 'blog' ? (lang === 'ru' ? '/en/' : '/') : alternatePath(page, lang);
 const linkColor = 'color-mix(in srgb, var(--color-text) 78%, transparent)';
 const activeColor = 'var(--color-accent)';
 
@@ -46,10 +48,17 @@ const initials = lang === 'ru' ? 'ЕЕ' : 'YY';
       <a href={servicesHref} style={`text-decoration: none; color: ${linkColor};`} style-hover="color: var(--color-accent);">{t.nav.services}</a>
       <a href={workHref} style={`text-decoration: none; color: ${linkColor};`} style-hover="color: var(--color-accent);">{t.nav.work}</a>
       {
-        onHome ? (
+        page !== 'about' ? (
           <a href={about} style={`text-decoration: none; color: ${linkColor};`} style-hover="color: var(--color-accent);">{t.nav.about}</a>
         ) : (
           <a href="#top" style={`text-decoration: none; color: ${activeColor};`}>{t.nav.about}</a>
+        )
+      }
+      {
+        page === 'blog' ? (
+          <a href={blog} style={`text-decoration: none; color: ${activeColor};`}>{t.nav.blog}</a>
+        ) : (
+          <a href={blog} style={`text-decoration: none; color: ${linkColor};`} style-hover="color: var(--color-accent);">{t.nav.blog}</a>
         )
       }
       {onHome && <a href="#faq" style={`text-decoration: none; color: ${linkColor};`} style-hover="color: var(--color-accent);">{t.nav.faq}</a>}

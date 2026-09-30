@@ -1,0 +1,68 @@
+---
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+---
+
+<div style="position: relative; background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); min-height: 100vh;">
+  <SiteHeader lang="ru" page="blog" />
+  <main class="blog" style="position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; padding: 0 28px;">
+    <slot />
+  </main>
+  <SiteFooter lang="ru" page="blog" />
+</div>
+
+<style is:global>
+  .blog { line-height: 1.6; }
+  .blog a { text-decoration: none; }
+  .blog .crumbs { display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px; padding: 28px 0 0; color: color-mix(in srgb, var(--color-text) 55%, transparent); }
+  .blog .crumbs a { color: color-mix(in srgb, var(--color-text) 72%, transparent); }
+  .blog .crumbs a:hover { color: var(--color-accent); }
+  .blog .kicker { font-size: 13px; color: var(--color-accent); letter-spacing: .04em; }
+  .blog h1 { font-family: var(--font-heading); font-weight: 500; font-size: clamp(30px, 5vw, 46px); letter-spacing: -.03em; line-height: 1.12; margin: 10px 0 14px; }
+  .blog .lead { font-size: 18px; max-width: 720px; margin: 0; color: color-mix(in srgb, var(--color-text) 78%, transparent); }
+  .blog .muted { color: color-mix(in srgb, var(--color-text) 55%, transparent); }
+
+  .blog .card {
+    display: block; background: var(--color-surface); border: 1px solid var(--color-divider);
+    border-radius: var(--radius-md); padding: 20px; color: var(--color-text);
+    transition: border-color .2s ease, transform .2s ease;
+  }
+  .blog a.card:hover { border-color: color-mix(in srgb, var(--color-accent) 55%, transparent); transform: translateY(-2px); color: var(--color-text); }
+
+  .blog .toc { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+  .blog .toc a.card { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; align-items: start; height: 100%; box-sizing: border-box; }
+  .blog .toc .n { grid-row: 1 / span 2; font-family: var(--font-heading); font-size: 13px; color: var(--color-accent); padding-top: 4px; min-width: 22px; }
+  .blog .toc .t { font-family: var(--font-heading); font-size: 18px; letter-spacing: -.02em; }
+  .blog .toc .d { font-size: 13.5px; color: color-mix(in srgb, var(--color-text) 62%, transparent); }
+  .blog .toc .ref { font-size: 12px; color: var(--color-accent-300); }
+
+  .blog .figure { margin: 28px 0 0; border: 1px solid var(--color-divider); border-radius: var(--radius-md); overflow: hidden; background: #fff; display: block; }
+  .blog .figure img { display: block; width: 100%; height: auto; }
+  .blog .figcap { font-size: 12.5px; margin-top: 8px; }
+
+  .blog .grid2 { display: grid; grid-template-columns: 1.15fr .85fr; gap: 16px; margin-top: 28px; align-items: start; }
+  .blog .panel { background: var(--color-surface); border: 1px solid var(--color-divider); border-radius: var(--radius-md); padding: 22px; }
+  .blog .panel h2 { font-family: var(--font-heading); font-weight: 500; font-size: 15px; letter-spacing: .02em; text-transform: uppercase; color: var(--color-accent); margin: 0 0 12px; }
+  .blog .panel ul { margin: 0; padding-left: 18px; display: grid; gap: 9px; font-size: 15px; color: color-mix(in srgb, var(--color-text) 86%, transparent); }
+  .blog .panel li::marker { color: var(--color-accent); }
+  .blog .stack { display: grid; gap: 16px; }
+  .blog pre { margin: 0; padding: 14px 16px; overflow-x: auto; background: var(--color-bg); border: 1px solid var(--color-divider); border-radius: var(--radius-sm); font-size: 13px; line-height: 1.55; }
+  .blog code { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: .92em; }
+  .blog li code { background: color-mix(in srgb, var(--color-accent) 14%, transparent); padding: 1px 6px; border-radius: 5px; }
+  .blog .panel.warn { border-color: color-mix(in srgb, var(--color-accent-2, var(--color-accent)) 50%, var(--color-divider)); }
+  .blog .panel.warn h2 { color: var(--color-accent-2, var(--color-accent)); }
+  .blog .panel p { margin: 0; font-size: 15px; color: color-mix(in srgb, var(--color-text) 86%, transparent); }
+
+  .blog .pager { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 40px 0 72px; }
+  .blog .pager .card { min-height: 64px; }
+  .blog .pager .next { text-align: right; }
+  .blog .pager small { display: block; font-size: 12px; margin-bottom: 4px; color: color-mix(in srgb, var(--color-text) 55%, transparent); }
+  .blog .pager span { font-family: var(--font-heading); font-size: 16px; }
+
+  @media (max-width: 860px) {
+    .blog .grid2 { grid-template-columns: 1fr; }
+    .blog .pager { grid-template-columns: 1fr; }
+    .blog .pager .next { text-align: left; }
+    .blog .toc { grid-template-columns: 1fr; }
+  }
+</style>
