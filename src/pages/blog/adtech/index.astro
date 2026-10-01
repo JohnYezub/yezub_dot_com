@@ -1,0 +1,38 @@
+---
+import Base from '../../../layouts/Base.astro';
+import BlogShell from '../../../components/BlogShell.astro';
+import { adtechEntries } from '../../../blog/adtech';
+
+const meta = {
+  title: 'AdTech с нуля — Блог — Евгений Езуб',
+  description: 'Шпаргалка по programmatic advertising: участники рынка, RTB, mediation, eCPM, данные и yield optimization. 13 страниц со схемами.',
+};
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+
+<Base lang="ru" page="blog" meta={meta} path="/blog/adtech">
+  <BlogShell>
+    <nav class="crumbs" aria-label="Навигация"><a href="/blog">Блог</a><span>/</span><span>AdTech</span></nav>
+    <header style="padding: 28px 0 32px;">
+      <div class="kicker">База знаний · {adtechEntries.length} страниц</div>
+      <h1>AdTech с нуля</h1>
+      <p class="lead">
+        Как устроена программатик-реклама: кто что продаёт, как проходит один показ, откуда берутся деньги и чем оптимизируют доход.
+        Короткие тезисы, примеры и схемы — читай по порядку или выбирай тему. Числа в примерах условные.
+      </p>
+    </header>
+    <ol class="toc" style="padding-bottom: 72px;">
+      {
+        adtechEntries.map((e, i) => (
+          <li>
+            <a class="card" href={`/blog/adtech/${e.slug}`}>
+              <span class="n">{pad(i + 1)}</span>
+              <span class="t">{e.title}</span>
+              <span class="d">{e.lead} <span class="ref">{e.ref}</span></span>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </BlogShell>
+</Base>

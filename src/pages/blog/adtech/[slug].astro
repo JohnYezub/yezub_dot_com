@@ -1,0 +1,101 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Base from '../../../layouts/Base.astro';
+import BlogShell from '../../../components/BlogShell.astro';
+import { adtechEntries } from '../../../blog/adtech';
+
+export function getStaticPaths() {
+  return adtechEntries.map((entry, i) => ({
+    params: { slug: entry.slug },
+    props: { entry, index: i },
+  }));
+}
+
+const { entry, index } = Astro.props;
+const images = import.meta.glob<{ default: ImageMetadata }>('../../../assets/blog/adtech/*.webp', { eager: true });
+const image = entry.image ? images[`../../../assets/blog/adtech/${entry.image}.webp`].default : undefined;
+
+const prev = adtechEntries[index - 1];
+const next = adtechEntries[index + 1];
+const pad = (n: number) => String(n).padStart(2, '0');
+
+const meta = {
+  title: `${entry.title} — AdTech с нуля — Евгений Езуб`,
+  description: entry.lead,
+};
+---
+
+<Base lang="ru" page="blog" meta={meta} path={`/blog/adtech/${entry.slug}`}>
+  <BlogShell>
+    <nav class="crumbs" aria-label="Навигация">
+      <a href="/blog">Блог</a><span>/</span><a href="/blog/adtech">AdTech</a><span>/</span><span>{pad(index + 1)}</span>
+    </nav>
+    <header style="padding: 28px 0 0;">
+      <div class="kicker">{pad(index + 1)} / {adtechEntries.length} · {entry.ref}</div>
+      <h1>{entry.title}</h1>
+      <p class="lead">{entry.lead}</p>
+    </header>
+
+    {
+      image && (
+        <>
+          <a class="figure" href={image.src} target="_blank" rel="noopener" aria-label="Открыть схему в полном размере">
+            <Image src={image} alt={`Схема: ${entry.title}. ${entry.caption ?? ''}`} widths={[640, 960, 1536]} sizes="(max-width: 1236px) 100vw, 1180px" loading="eager" />
+          </a>
+          <div class="figcap muted">{entry.caption}</div>
+        </>
+      )
+    }
+
+    <div class="grid2" style={image ? undefined : 'margin-top: 36px;'}>
+      <section class="panel">
+        <h2>Главное</h2>
+        <ul>{entry.points.map((p) => <li set:html={p} />)}</ul>
+      </section>
+      <div class="stack">
+        {
+          entry.example && (
+            <section class="panel">
+              <h2>{entry.example.title}</h2>
+              <pre><code>{entry.example.code}</code></pre>
+            </section>
+          )
+        }
+        {
+          entry.pick && (
+            <section class="panel">
+              <h2>{entry.pick.title ?? 'Что когда выбирать'}</h2>
+              <ul>{entry.pick.items.map((p) => <li set:html={p} />)}</ul>
+            </section>
+          )
+        }
+        {
+          entry.warn && (
+            <section class="panel warn">
+              <h2>{entry.warn.title}</h2>
+              <p>{entry.warn.text}</p>
+            </section>
+          )
+        }
+      </div>
+    </div>
+
+    <nav class="pager" aria-label="Соседние страницы">
+      {
+        prev ? (
+          <a class="card" href={`/blog/adtech/${prev.slug}`}><small>← {pad(index)}</small><span>{prev.title}</span></a>
+        ) : (
+          <a class="card" href="/blog/adtech"><small>←</small><span>Оглавление</span></a>
+        )
+      }
+      {
+        next ? (
+          <a class="card next" href={`/blog/adtech/${next.slug}`}><small>{pad(index + 2)} →</small><span>{next.title}</span></a>
+        ) : (
+          <a class="card next" href="/blog/adtech"><small>Конец →</small><span>Оглавление</span></a>
+        )
+      }
+    </nav>
+  </BlogShell>
+</Base>

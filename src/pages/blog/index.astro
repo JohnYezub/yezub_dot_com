@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import BlogShell from '../../components/BlogShell.astro';
 import { backendEntries } from '../../blog/backend';
+import { adtechEntries } from '../../blog/adtech';
 
 const meta = {
   title: 'Блог — Евгений Езуб',
@@ -22,6 +23,13 @@ const meta = {
           <span class="n">01</span>
           <span class="t">Backend</span>
           <span class="d">Карта backend-разработки 2026: от осей компромиссов до system design. {backendEntries.length} страниц — схема и тезисы.</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="/blog/adtech">
+          <span class="n">02</span>
+          <span class="t">AdTech</span>
+          <span class="d">Programmatic advertising с нуля: участники, RTB, mediation, eCPM, данные и yield optimization. {adtechEntries.length} страниц — схема и тезисы.</span>
         </a>
       </li>
     </ul>
