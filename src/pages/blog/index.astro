@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import BlogShell from '../../components/BlogShell.astro';
 import { backendEntries } from '../../blog/backend';
 import { adtechEntries } from '../../blog/adtech';
+import { growthChapters } from '../../blog/growth';
 
 const meta = {
   title: 'Блог — Евгений Езуб',
@@ -19,15 +20,22 @@ const meta = {
     </header>
     <ul class="toc" style="padding-bottom: 72px;">
       <li>
-        <a class="card" href="/blog/backend">
+        <a class="card" href="/blog/growth">
           <span class="n">01</span>
+          <span class="t">Запуск и рост приложения</span>
+          <span class="d">Руководство: аудитория, аналитика, атрибуция, ASO, реклама, монетизация, юнит-экономика и план на 90 дней. {growthChapters.length} глав со схемами.</span>
+        </a>
+      </li>
+      <li>
+        <a class="card" href="/blog/backend">
+          <span class="n">02</span>
           <span class="t">Backend</span>
           <span class="d">Карта backend-разработки 2026: от осей компромиссов до system design. {backendEntries.length} страниц — схема и тезисы.</span>
         </a>
       </li>
       <li>
         <a class="card" href="/blog/adtech">
-          <span class="n">02</span>
+          <span class="n">03</span>
           <span class="t">AdTech</span>
           <span class="d">Programmatic advertising с нуля: участники, RTB, mediation, eCPM, данные и yield optimization. {adtechEntries.length} страниц — схема и тезисы.</span>
         </a>

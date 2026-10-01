@@ -1,0 +1,45 @@
+---
+import Base from '../../../layouts/Base.astro';
+import BlogShell from '../../../components/BlogShell.astro';
+import { growthChapters, shortLead } from '../../../blog/growth';
+
+const meta = {
+  title: 'Запуск и рост приложения — Блог — Евгений Езуб',
+  description: 'Практическое руководство для независимого разработчика и небольшой команды: аудитория, аналитика, атрибуция, ASO, реклама, монетизация, юнит-экономика и план на 90 дней.',
+};
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+
+<Base lang="ru" page="blog" meta={meta} path="/blog/growth">
+  <BlogShell>
+    <nav class="crumbs" aria-label="Навигация"><a href="/blog">Блог</a><span>/</span><span>Запуск и рост</span></nav>
+    <header style="padding: 28px 0 32px;">
+      <div class="kicker">Руководство · {growthChapters.length} глав · версия от 1 октября 2026</div>
+      <h1>Как запустить мобильное приложение и вырастить его аудиторию</h1>
+      <p class="lead">
+        Практическое руководство для независимого разработчика и небольшой команды: что делать до и после публикации — изучать аудиторию,
+        измерять поведение, привлекать пользователей и проверять монетизацию. iOS и Android; сквозной пример — приложение с прогнозом приливов, все числа условные.
+      </p>
+      <p style="margin: 18px 0 0;">
+        <a class="dl" href="/downloads/app-growth-guide.docx" download>Скачать целиком (.docx)</a>
+      </p>
+      <p class="muted" style="font-size: 13.5px; max-width: 720px; margin: 20px 0 0;">
+        Объёмы интервью и тестов — рекомендации для организации работы, а не статистические гарантии. Ссылки ведут на первичные источники:
+        перед подключением сервисов проверяйте требования магазинов и их доступность для своей страны, аккаунта и даты запуска.
+      </p>
+    </header>
+    <ol class="toc" style="padding-bottom: 72px;">
+      {
+        growthChapters.map((e) => (
+          <li>
+            <a class="card" href={`/blog/growth/${e.slug}`}>
+              <span class="n">{pad(e.n)}</span>
+              <span class="t">{e.title}</span>
+              <span class="d">{shortLead(e.lead)}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </BlogShell>
+</Base>
