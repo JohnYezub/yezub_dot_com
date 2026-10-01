@@ -1,7 +1,8 @@
 ---
 import Base from '../../../layouts/Base.astro';
 import BlogShell from '../../../components/BlogShell.astro';
-import { growthChapters, shortLead } from '../../../blog/growth';
+import { growthChapters } from '../../../blog/growth';
+import { growthCards } from '../../../blog/growth-cards';
 
 const meta = {
   title: 'Запуск и рост приложения — Блог — Евгений Езуб',
@@ -35,7 +36,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
             <a class="card" href={`/blog/growth/${e.slug}`}>
               <span class="n">{pad(e.n)}</span>
               <span class="t">{e.title}</span>
-              <span class="d">{shortLead(e.lead)}</span>
+              <span class="d">{growthCards[e.n]?.lead ?? e.lead}</span>
             </a>
           </li>
         ))
