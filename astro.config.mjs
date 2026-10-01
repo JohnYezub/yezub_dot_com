@@ -5,7 +5,7 @@ import { defineConfig } from 'astro/config';
 // build command `astro build`, output directory `dist/`.
 // https://docs.astro.build/en/guides/deploy/vercel/
 export default defineConfig({
-  site: 'https://yezub.com',
+  site: 'https://www.yezub.com',
   i18n: {
     defaultLocale: 'ru',
     locales: ['ru', 'en'],

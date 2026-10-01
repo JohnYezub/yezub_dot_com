@@ -3,6 +3,8 @@ import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import Base from '../../../layouts/Base.astro';
 import BlogShell from '../../../components/BlogShell.astro';
+import { publishedAt, formatDate } from '../../../blog/dates';
+import { articleNode, breadcrumbNode } from '../../../lib/seo';
 import { growthChapters, shortLead } from '../../../blog/growth';
 import { growthCards } from '../../../blog/growth-cards';
 
@@ -28,9 +30,21 @@ const meta = {
   title: `${entry.title} — Запуск и рост приложения — Евгений Езуб`,
   description: shortLead(lead, 200),
 };
+
+const published = publishedAt('growth', index);
+const pagePath = `/blog/growth/${entry.slug}`;
+const ogImage = image ? new URL(image.src, Astro.site).href : undefined;
+const schema = [
+  articleNode({ title: entry.title, description: meta.description, path: pagePath, published, section: 'Запуск и рост приложения', image: ogImage }),
+  breadcrumbNode([
+    { name: 'Блог', path: '/blog' },
+    { name: 'Запуск и рост', path: '/blog/growth' },
+    { name: entry.title, path: pagePath },
+  ]),
+];
 ---
 
-<Base lang="ru" page="blog" meta={meta} path={`/blog/growth/${entry.slug}`}>
+<Base lang="ru" page="blog" meta={meta} path={pagePath} image={ogImage} article={{ published, section: 'Запуск и рост приложения' }} schema={schema}>
   <BlogShell>
     <nav class="crumbs" aria-label="Навигация">
       <a href="/blog">Блог</a><span>/</span><a href="/blog/growth">Запуск и рост</a><span>/</span><span>{pad(entry.n)}</span>
@@ -38,6 +52,7 @@ const meta = {
     <header style="padding: 28px 0 0;">
       <div class="kicker">Глава {pad(entry.n)} / {growthChapters.length}</div>
       <h1>{entry.title}</h1>
+      <div class="byline muted">Евгений Езуб · <time datetime={published}>{formatDate(published)}</time></div>
       <p class="lead">{lead}</p>
     </header>
 

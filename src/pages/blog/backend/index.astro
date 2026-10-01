@@ -1,6 +1,7 @@
 ---
 import Base from '../../../layouts/Base.astro';
 import BlogShell from '../../../components/BlogShell.astro';
+import { itemListNode, breadcrumbNode } from '../../../lib/seo';
 import { backendEntries } from '../../../blog/backend';
 
 const meta = {
@@ -8,9 +9,14 @@ const meta = {
   description: 'Карта современной backend-разработки: задача → класс технологий → выбор → почему. 25 страниц-шпаргалок со схемами.',
 };
 const pad = (n: number) => String(n).padStart(2, '0');
+
+const schema = [
+  breadcrumbNode([{ name: 'Блог', path: '/blog' }, { name: 'Backend', path: '/blog/backend' }]),
+  itemListNode(backendEntries.map((e) => ({ name: e.title, path: `/blog/backend/${e.slug}` }))),
+];
 ---
 
-<Base lang="ru" page="blog" meta={meta} path="/blog/backend">
+<Base lang="ru" page="blog" meta={meta} path="/blog/backend" schema={schema}>
   <BlogShell>
     <nav class="crumbs" aria-label="Навигация"><a href="/blog">Блог</a><span>/</span><span>Backend</span></nav>
     <header style="padding: 28px 0 32px;">

@@ -1,6 +1,7 @@
 ---
 import Base from '../../../layouts/Base.astro';
 import BlogShell from '../../../components/BlogShell.astro';
+import { itemListNode, breadcrumbNode } from '../../../lib/seo';
 import { growthChapters } from '../../../blog/growth';
 import { growthCards } from '../../../blog/growth-cards';
 
@@ -9,9 +10,14 @@ const meta = {
   description: 'Практическое руководство для независимого разработчика и небольшой команды: аудитория, аналитика, атрибуция, ASO, реклама, монетизация, юнит-экономика и план на 90 дней.',
 };
 const pad = (n: number) => String(n).padStart(2, '0');
+
+const schema = [
+  breadcrumbNode([{ name: 'Блог', path: '/blog' }, { name: 'Запуск и рост', path: '/blog/growth' }]),
+  itemListNode(growthChapters.map((e) => ({ name: e.title, path: `/blog/growth/${e.slug}` }))),
+];
 ---
 
-<Base lang="ru" page="blog" meta={meta} path="/blog/growth">
+<Base lang="ru" page="blog" meta={meta} path="/blog/growth" schema={schema}>
   <BlogShell>
     <nav class="crumbs" aria-label="Навигация"><a href="/blog">Блог</a><span>/</span><span>Запуск и рост</span></nav>
     <header style="padding: 28px 0 32px;">

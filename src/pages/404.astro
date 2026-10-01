@@ -6,7 +6,7 @@ import SiteFooter from '../components/SiteFooter.astro';
 const lang = 'ru' as const;
 ---
 
-<Base lang={lang} page="home">
+<Base lang={lang} page="home" noindex>
   <div style="position: relative; background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); min-height: 100vh; display: flex; flex-direction: column;">
     <SiteHeader lang={lang} page="home" />
     <main style="flex: 1; display: grid; place-items: center; text-align: center; padding: 120px 28px;">

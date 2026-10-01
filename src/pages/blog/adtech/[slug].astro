@@ -3,6 +3,8 @@ import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import Base from '../../../layouts/Base.astro';
 import BlogShell from '../../../components/BlogShell.astro';
+import { publishedAt, formatDate } from '../../../blog/dates';
+import { articleNode, breadcrumbNode } from '../../../lib/seo';
 import { adtechEntries } from '../../../blog/adtech';
 
 export function getStaticPaths() {
@@ -24,9 +26,21 @@ const meta = {
   title: `${entry.title} — AdTech с нуля — Евгений Езуб`,
   description: entry.lead,
 };
+
+const published = publishedAt('adtech', index);
+const pagePath = `/blog/adtech/${entry.slug}`;
+const ogImage = image ? new URL(image.src, Astro.site).href : undefined;
+const schema = [
+  articleNode({ title: entry.title, description: meta.description, path: pagePath, published, section: 'AdTech с нуля', image: ogImage }),
+  breadcrumbNode([
+    { name: 'Блог', path: '/blog' },
+    { name: 'AdTech', path: '/blog/adtech' },
+    { name: entry.title, path: pagePath },
+  ]),
+];
 ---
 
-<Base lang="ru" page="blog" meta={meta} path={`/blog/adtech/${entry.slug}`}>
+<Base lang="ru" page="blog" meta={meta} path={pagePath} image={ogImage} article={{ published, section: 'AdTech с нуля' }} schema={schema}>
   <BlogShell>
     <nav class="crumbs" aria-label="Навигация">
       <a href="/blog">Блог</a><span>/</span><a href="/blog/adtech">AdTech</a><span>/</span><span>{pad(index + 1)}</span>
@@ -34,6 +48,7 @@ const meta = {
     <header style="padding: 28px 0 0;">
       <div class="kicker">{pad(index + 1)} / {adtechEntries.length} · {entry.ref}</div>
       <h1>{entry.title}</h1>
+      <div class="byline muted">Евгений Езуб · <time datetime={published}>{formatDate(published)}</time></div>
       <p class="lead">{entry.lead}</p>
     </header>
 

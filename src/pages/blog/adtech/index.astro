@@ -1,6 +1,7 @@
 ---
 import Base from '../../../layouts/Base.astro';
 import BlogShell from '../../../components/BlogShell.astro';
+import { itemListNode, breadcrumbNode } from '../../../lib/seo';
 import { adtechEntries } from '../../../blog/adtech';
 
 const meta = {
@@ -8,9 +9,14 @@ const meta = {
   description: 'Шпаргалка по programmatic advertising: участники рынка, RTB, mediation, eCPM, данные и yield optimization. 13 страниц со схемами.',
 };
 const pad = (n: number) => String(n).padStart(2, '0');
+
+const schema = [
+  breadcrumbNode([{ name: 'Блог', path: '/blog' }, { name: 'AdTech', path: '/blog/adtech' }]),
+  itemListNode(adtechEntries.map((e) => ({ name: e.title, path: `/blog/adtech/${e.slug}` }))),
+];
 ---
 
-<Base lang="ru" page="blog" meta={meta} path="/blog/adtech">
+<Base lang="ru" page="blog" meta={meta} path="/blog/adtech" schema={schema}>
   <BlogShell>
     <nav class="crumbs" aria-label="Навигация"><a href="/blog">Блог</a><span>/</span><span>AdTech</span></nav>
     <header style="padding: 28px 0 32px;">

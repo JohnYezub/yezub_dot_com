@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import BlogShell from '../../components/BlogShell.astro';
+import { itemListNode, breadcrumbNode } from '../../lib/seo';
 import { backendEntries } from '../../blog/backend';
 import { adtechEntries } from '../../blog/adtech';
 import { growthChapters } from '../../blog/growth';
@@ -9,9 +10,18 @@ const meta = {
   title: 'Блог — Евгений Езуб',
   description: 'Короткие базы знаний со схемами и текстами: как устроено и какими решениями какие задачи решать.',
 };
+
+const schema = [
+  breadcrumbNode([{ name: 'Блог', path: '/blog' }]),
+  itemListNode([
+    { name: 'Запуск и рост приложения', path: '/blog/growth' },
+    { name: 'Backend Map 2026', path: '/blog/backend' },
+    { name: 'AdTech с нуля', path: '/blog/adtech' },
+  ]),
+];
 ---
 
-<Base lang="ru" page="blog" meta={meta} path="/blog">
+<Base lang="ru" page="blog" meta={meta} path="/blog" schema={schema}>
   <BlogShell>
     <header style="padding: 56px 0 32px;">
       <div class="kicker">Блог</div>
